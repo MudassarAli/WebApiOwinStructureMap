@@ -17,6 +17,7 @@ namespace WebApiOwinStructureMap
             HttpConfiguration httpConfiguration = new HttpConfiguration();
             WebApiConfig.Register(httpConfiguration);
             appBuilder.UseWebApi(httpConfiguration);
+
         }
     }
 }

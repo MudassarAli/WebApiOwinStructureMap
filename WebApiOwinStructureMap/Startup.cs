@@ -4,6 +4,9 @@ using Microsoft.Owin;
 using Owin;
 using System.Web.Http;
 using WebApiOwinStructureMap.App_Start;
+using StructureMap;
+using WebApiOwinStructureMap.DependencyResolution;
+using System.Diagnostics;
 
 [assembly: OwinStartup(typeof(WebApiOwinStructureMap.Startup))]
 
@@ -13,8 +16,11 @@ namespace WebApiOwinStructureMap
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
+            IContainer container = IoC.Initialize();
+            container.AssertConfigurationIsValid();
+            Debug.WriteLine(container.WhatDoIHave());
             HttpConfiguration httpConfiguration = new HttpConfiguration();
+            httpConfiguration.DependencyResolver = new StructureMapWebApiDependencyResolver(container);
             WebApiConfig.Register(httpConfiguration);
             appBuilder.UseWebApi(httpConfiguration);
 

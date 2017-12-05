@@ -37,11 +37,6 @@ namespace WebApiOwinStructureMap.Service
                 response.OperationException = ex;
             }
             return response;
-        }
-
-        Task<GetCustomersResponse> ICustomerService.GetCustomersAsync()
-        {
-            throw new NotImplementedException();
-        }
+        }       
     }
 }

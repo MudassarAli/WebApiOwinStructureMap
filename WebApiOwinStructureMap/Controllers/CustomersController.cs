@@ -15,9 +15,10 @@ namespace WebApiOwinStructureMap.Controllers
     {
         private readonly ICustomerService _customerService;
 
-        public CustomersController()
+        public CustomersController(ICustomerService customerService)
         {
-            _customerService = new CustomerService(new CustomerRepository());
+            if (customerService == null) throw new ArgumentNullException("ICustomerService");
+            _customerService = customerService;
         }
 
         public async Task<IHttpActionResult> Get()
